@@ -7,9 +7,9 @@
 ### 使用方法
 
 后台：  
-创建本地或远程数据库mysql
-然后创建库名back_info 导入back_info.sql文件生成表结构。
-在server/app/pool.js 去配置数据库连接信息
+创建本地或远程数据库mysql  
+然后创建库名back_info 导入back_info.sql文件生成表结构。  
+在server/app/pool.js 去配置数据库连接信息  
 开启方法：npm i   
 node app.js
 
