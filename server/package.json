@@ -1,0 +1,36 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": " a test demo",
+  "main": "index.js",
+  "scripts": {
+    "start": "hotnode app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faintout/testNode.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "faintout",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/faintout/testNode/issues"
+  },
+  "homepage": "https://github.com/faintout/testNode#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.12.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^9.0.1",
+    "multer": "^1.4.2",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {}
+}
