@@ -10,15 +10,15 @@
 创建本地或远程数据库mysql
 然后创建库名back_info 导入back_info.sql文件生成表结构。
 在server/app/pool.js 去配置数据库连接信息
-开启方法：npm i 
+开启方法：npm i   
 node app.js
 
 前台：  
-npm i 
+npm i   
 npm run serve
 
-账号密码在数据库的user_info
-默认admin P@ssw0rd
+账号密码在数据库的user_info  
+默认admin P@ssw0rd  
 
 
 此代码用于交流学习。
