@@ -28,7 +28,7 @@
             <el-table-column label="Name" prop="name">
             </el-table-column> -->
             <el-table-column align="right">
-                <template slot="header">
+                <template slot="header" slot-scope="scope">
                     <el-input v-model="search" size="mini" placeholder="输入关键字搜索" />
                 </template>
                 <template slot-scope="scope">
@@ -57,10 +57,10 @@
         components: { addList },
         data() {
             return {
+                search: '',
                 editData: '',
                 dialogVisible: false,
                 tableData: [],
-                search: ''
             }
         },
         watch: {},
@@ -83,11 +83,11 @@
                             // this.$store.commit('delToken')
                             // this.$router.push('/login')
                             // 调用接口，本地index删除
-                            AjaxTool.delTableById({id:row.id}).then(res=>{
-                                if(res.success){
+                            AjaxTool.delTableById({ id: row.id }).then(res => {
+                                if (res.success) {
                                     this.$message.success(res.msg)
-                                    this.tableData.splice(index,1)
-                                }else{
+                                    this.tableData.splice(index, 1)
+                                } else {
                                     this.$message.error(res.msg)
                                 }
                             })
