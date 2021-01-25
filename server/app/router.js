@@ -28,7 +28,7 @@ router.post('/login',async(ctx,next)=>{
     // ctx.body = await selectTable("student_item")
 })
 router.post('/getTableData',async(ctx,next)=>{
-    ctx.body = await selectTable("table_one")
+    ctx.body = await selectTable("table_one",ctx)
     // ctx.body = await selectTable("student_item")
 })
 router.post('/addOrEditTableData',async(ctx,next)=>{

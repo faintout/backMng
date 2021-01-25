@@ -4,7 +4,7 @@ let msg = "处理成功";
 let success = true;
 let code = 200;
 let tableName = 'table_one'
-function selectTable(value) {
+function selectTable(value,ctx) {
     return new Promise((res, rej) => {
         pool.getConnection((err, conn) => {
             conn.query("select * from " + value, (e, r) => {
@@ -19,8 +19,25 @@ function selectTable(value) {
                     resu.code = e.code;
                     resu.msg = "处理失败" + e.sqlMessage || "";
                 }
-                resu.data = r
-                return res(new Result(resu))
+                let pageSize = ctx.request.body.pageSize
+                let pageIndex = ctx.request.body.pageIndex
+                console.log('pageSize',pageSize);
+                //数据处理
+                let allDataList  = []
+                let dataList = []
+                for(let i=0;i<r.length;i++){
+                    dataList.push(r[i])
+                    console.log('i%pageSize',i,r.length);
+                    if(dataList.length==pageSize||i==r.length-1){
+                        allDataList.push(dataList)
+                        dataList = []
+                    }
+                }
+                console.log('allDataList',allDataList);
+                resu.data = pageSize==0?r:allDataList[pageIndex-1]
+                resu.total = r.length
+                
+                return res(resu)
             });
             conn.release();
         });
@@ -171,7 +188,7 @@ function delTable(res) {
     });
 }
 
-function Result({ code = 200, msg = "", data = {}, success = "" }) {
+function Result({ code = 200, msg = "", data = {}, success = ""  }) {
     this.code = code;
     this.msg = msg;
     this.success = success;
