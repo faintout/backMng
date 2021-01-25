@@ -38,7 +38,7 @@
             </el-table-column>
         </el-table>
         <!-- 每页14个 -->
-        <el-pagination background layout="prev, pager, next" :total="totalPages" @current-change="currentPage" :page-size="pageSize">
+        <el-pagination background layout="prev, pager, next" :total="1000" @current-change="currentPage">
         </el-pagination>
         <el-dialog title="修改信息" :visible.sync="dialogVisible" width="70%">
             <addList :editData="editData"></addList>
@@ -61,18 +61,9 @@
                 editData: '',
                 dialogVisible: false,
                 tableData: [],
-                pageIndex:1,
-                pageSize :14,
-                totalPages:0
             }
         },
-        watch: {
-            pageIndex(n,o){
-                if(n!=o){
-                    this.getTableList()
-                }
-            }
-        },
+        watch: {},
         computed: {},
         methods: {
             handleEdit(index, row) {
@@ -110,17 +101,21 @@
             },
             currentPage(e){
                 // console.log(e);
-                this.pageIndex = e
+                this.currentPage = e
+            },
+            addData() {
+                for (let i = 0; i < 100; i++) {
+                    this.tableData.push({
+                        date: '2016-05-02',
+                        name: '王小虎',
+                        address: '上海市普陀区金沙江路 1518 弄'
+                    })
+                }
             },
             getTableList() {
-                let params ={
-                    pageSize : this.pageSize,
-                    pageIndex : this.pageIndex
-                }
-                AjaxTool.getTableData(params).then(res => {
+                AjaxTool.getTableData().then(res => {
                     if (res.success) {
                         this.tableData = res.data || []
-                        this.totalPages = res.total||0
                     } else {
                         this.$message.error(res.msg)
                     }
@@ -131,6 +126,7 @@
             this.getTableList()
         },
         created() {
+            // this.addData()
         },
     }
 </script>

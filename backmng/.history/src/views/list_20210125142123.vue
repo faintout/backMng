@@ -38,7 +38,7 @@
             </el-table-column>
         </el-table>
         <!-- 每页14个 -->
-        <el-pagination background layout="prev, pager, next" :total="totalPages" @current-change="currentPage" :page-size="pageSize">
+        <el-pagination background layout="prev, pager, next" :total="totalPages" @current-change="currentPage">
         </el-pagination>
         <el-dialog title="修改信息" :visible.sync="dialogVisible" width="70%">
             <addList :editData="editData"></addList>
@@ -114,10 +114,9 @@
             },
             getTableList() {
                 let params ={
-                    pageSize : this.pageSize,
-                    pageIndex : this.pageIndex
+                    
                 }
-                AjaxTool.getTableData(params).then(res => {
+                AjaxTool.getTableData().then(res => {
                     if (res.success) {
                         this.tableData = res.data || []
                         this.totalPages = res.total||0

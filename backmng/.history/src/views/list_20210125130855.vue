@@ -38,7 +38,7 @@
             </el-table-column>
         </el-table>
         <!-- 每页14个 -->
-        <el-pagination background layout="prev, pager, next" :total="totalPages" @current-change="currentPage" :page-size="pageSize">
+        <el-pagination background layout="prev, pager, next" :total="1000" @current-change="currentPage">
         </el-pagination>
         <el-dialog title="修改信息" :visible.sync="dialogVisible" width="70%">
             <addList :editData="editData"></addList>
@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import func from '../../vue-temp/vue-editor-bridge'
     import { AjaxTool } from '../request/ajaxUtil'
     import addList from './addList'
     export default {
@@ -61,17 +62,15 @@
                 editData: '',
                 dialogVisible: false,
                 tableData: [],
-                pageIndex:1,
-                pageSize :14,
-                totalPages:0
+                currentPage:1
             }
         },
         watch: {
-            pageIndex(n,o){
-                if(n!=o){
-                    this.getTableList()
-                }
-            }
+            // currentPage(n,o){
+            //     if(n!=o){
+            //         this.getTableList()
+            //     }
+            // }
         },
         computed: {},
         methods: {
@@ -110,17 +109,12 @@
             },
             currentPage(e){
                 // console.log(e);
-                this.pageIndex = e
+                this.currentPage = e
             },
             getTableList() {
-                let params ={
-                    pageSize : this.pageSize,
-                    pageIndex : this.pageIndex
-                }
-                AjaxTool.getTableData(params).then(res => {
+                AjaxTool.getTableData().then(res => {
                     if (res.success) {
                         this.tableData = res.data || []
-                        this.totalPages = res.total||0
                     } else {
                         this.$message.error(res.msg)
                     }

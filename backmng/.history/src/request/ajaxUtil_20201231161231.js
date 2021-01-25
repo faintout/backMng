@@ -45,9 +45,9 @@ const AjaxTool = {
             });
         });
     },
-    getTableData(params) {
+    getTableData() {
         return new Promise((resolve, reject) => {
-            getData('/getTableData',params).then(res => {
+            getData('/getTableData').then(res => {
                 if (res.success) {
                     resolve(res);
                 } else {
