@@ -19,9 +19,8 @@ function selectTable(value,ctx) {
                     resu.code = e.code;
                     resu.msg = "处理失败" + e.sqlMessage || "";
                 }
-                let pageSize = ctx.request.body.pageSize
-                let pageIndex = ctx.request.body.pageIndex
-                console.log('pageSize',pageSize);
+                let {pageSize,pageIndex,searchName} =ctx.request.body
+                r = r.filter(data => !searchName || data.name.toLowerCase().includes(searchName.toLowerCase()))
                 //数据处理
                 let allDataList  = []
                 let dataList = []
@@ -34,7 +33,8 @@ function selectTable(value,ctx) {
                     }
                 }
                 console.log('allDataList',allDataList);
-                resu.data = pageSize==0?r:allDataList[pageIndex-1]
+                resu.data = (pageSize==0?r:allDataList[pageIndex-1])||[]
+                // resu.data = r
                 resu.total = r.length
                 
                 return res(resu)
