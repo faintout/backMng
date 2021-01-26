@@ -1,6 +1,7 @@
 <template>
     <div class="list_content">
-        <el-table class="list_content_table" :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))" style="width: 100%">
+        <!-- .filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase())) -->
+        <el-table class="list_content_table" :data="tableData" style="width: 100%">
             <el-table-column label="Name" prop="name">
             </el-table-column>
             <el-table-column label="info" prop="info">
@@ -29,7 +30,10 @@
             </el-table-column> -->
             <el-table-column align="right">
                 <template slot="header" slot-scope="scope">
-                    <el-input v-model="search" size="mini" placeholder="输入关键字搜索" />
+                    <span style="display: flex;justify-content: space-between;">
+                        <el-input v-model="search" size="mini" placeholder="输入关键字搜索" />
+                        <el-button size="mini" @click="getTableList(1)">搜索</el-button>
+                    </span>
                 </template>
                 <template slot-scope="scope">
                     <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
@@ -61,14 +65,14 @@
                 editData: '',
                 dialogVisible: false,
                 tableData: [],
-                pageIndex:1,
-                pageSize :14,
-                totalPages:0
+                pageIndex: 1,
+                pageSize: 14,
+                totalPages: 0
             }
         },
         watch: {
-            pageIndex(n,o){
-                if(n!=o){
+            pageIndex(n, o) {
+                if (n != o) {
                     this.getTableList()
                 }
             }
@@ -108,19 +112,20 @@
                     }
                 })
             },
-            currentPage(e){
+            currentPage(e) {
                 // console.log(e);
                 this.pageIndex = e
             },
-            getTableList() {
-                let params ={
-                    pageSize : this.pageSize,
-                    pageIndex : this.pageIndex
+            getTableList(pageIndex) {
+                let params = {
+                    pageSize: this.pageSize,
+                    pageIndex: pageIndex||this.pageIndex,
+                    searchName:this.search
                 }
                 AjaxTool.getTableData(params).then(res => {
                     if (res.success) {
                         this.tableData = res.data || []
-                        this.totalPages = res.total||0
+                        this.totalPages = res.total || 0
                     } else {
                         this.$message.error(res.msg)
                     }
@@ -130,8 +135,7 @@
         mounted() {
             this.getTableList()
         },
-        created() {
-        },
+        created() {},
     }
 </script>
 <style lang="less" scoped>
