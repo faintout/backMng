@@ -60,7 +60,7 @@ function selectUserInfo(ctx) {
                 if (r.some(user => JSON.stringify(user) === JSON.stringify(ctx.request.body))) {
                     // if (r.include(user=>JSON.stringify(user))== JSON.stringify(ctx.request.body) ) {
                     //生成token
-                    let token = createToken()
+                    let token = createToken(ctx.request.body)
                     console.log(token)
                     return res({ success: true, code: 200, token, msg: '登录成功!' })
                 } else {

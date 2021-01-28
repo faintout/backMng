@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken');
 let secret = 'my_love_';
 
-function createToken() {
-    let payload = { userName: 'admin', passWord: 'P@ssw0rd' }
+function createToken(user) {
+    console.log('user',user);
     // console.log('token',token)
-    return token = jwt.sign(payload, secret, { expiresIn: 60 * 60 * 72 });
+    return token = jwt.sign(user, secret, { expiresIn: 60 * 60 * 72 });
 }
 function decodeToken(token) {
     let payload=''
