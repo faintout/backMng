@@ -1,6 +1,6 @@
 <template>
     <div class="h100">
-        <div class="menu_list" style="width:200px;float:left">
+        <div class="menu_list" style="width:10%;float:left">
             <!-- <header-top></header-top> -->
             <img :src="require('../assets/images/'+(!isCollapse?'7':'7_25px')+'.png')" alt="" @click="isCollapse = !isCollapse" :style="{left:isCollapse?'-64px':0}">
             <!-- <img src="../assets/images/7.png" alt="" @click="isCollapse = !isCollapse" style="cursor:pointer;"> -->
@@ -23,10 +23,10 @@
                 </el-col>
             </el-row>
         </div>
-        <div style="width:80%;float:left">
+        <div style="width:90%;float:left;height:100%">
             <header-top></header-top>
-            <div class="content">
-                <el-breadcrumb separator-class="el-icon-arrow-right"  style="margin: 5px 0 20px 20px;">
+            <div class="content" style="height: calc(100% - 64px);">
+                <el-breadcrumb separator-class="el-icon-arrow-right" style="height: 30px;line-height: 30px;margin-left: 30px;">
                     <el-breadcrumb-item>{{$route.name}}</el-breadcrumb-item>
                     <el-breadcrumb-item>{{$route.name}}</el-breadcrumb-item>
                     <el-breadcrumb-item>{{$route.name}}</el-breadcrumb-item>
